@@ -1,0 +1,11 @@
+# Smithery registry manifest — https://smithery.ai/docs
+# The server itself lives in mcp/ and is published to npm as quality-control-plan-mcp,
+# so Smithery launches it straight from npm (no repo build required).
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties: {}
+    additionalProperties: false
+  commandFunction: |-
+    () => ({ command: 'npx', args: ['-y', 'quality-control-plan-mcp'] })
