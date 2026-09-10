@@ -1,13 +1,13 @@
 # Quality Control Plan MCP Server
 
-**Generate quality control plans and inspection reports from technical-drawing PDFs — from any MCP-enabled AI assistant.**
+**Generate quality control plans and inspection reports from technical-drawing PDFs — from any MCP-enabled assistant.**
 
-This [Model Context Protocol](https://modelcontextprotocol.io) server exposes the engine behind [quality-check-protocol.imnoo.com](https://quality-check-protocol.imnoo.com) (by [Imnoo](https://www.imnoo.com)). Need a quality control plan or an inspection report for a technical drawing? Hand the PDF to your assistant: Imnoo's AI drawing analysis extracts every inspection characteristic — dimensional tolerances, ISO fit classes (H7 / g6), threads, geometric tolerances (GD&T) and surface finishes — and the server turns them into a numbered quality control plan with acceptance limits (⌀50 ±0.05 → 49.95–50.05), a measuring instrument per characteristic and an inspection class (100 %, Q1 reduced, Q2 spot check). It then writes the ballooned drawing PDF, the complete inspection package and the Excel measurement and inspection report — the same documents the Imnoo calculator produces. First-article inspection, PPAP-style ballooning and shop-floor measurement reports in one step.
+This [Model Context Protocol](https://modelcontextprotocol.io) server exposes the engine behind [quality-check-protocol.imnoo.com](https://quality-check-protocol.imnoo.com) (by [Imnoo](https://www.imnoo.com)). Need a quality control plan for a technical drawing? Hand the PDF to your assistant and get a numbered inspection plan in about a minute: every dimensional tolerance, ISO fit, thread, geometric tolerance (GD&T) and surface finish is extracted automatically by Imnoo's drawing analysis, ballooned on the drawing and listed with its acceptance limits — ⌀50 ±0.05 becomes 49.95–50.05 — and a measuring instrument. Ask for an inspection class (100 % full inspection, Q1 reduced, Q2 spot check), keep the balloon numbers printed on the drawing or renumber them (1, 001 or D001 style, in reading or measurement order), then let it write the ballooned drawing, the complete inspection package or the Excel measurement and inspection report — the same documents the Imnoo calculator produces. It covers first-article inspection, PPAP-style dimensional reports and shop-floor quality check protocols, on vector and scanned PDFs alike. Built by Imnoo, the planning, scheduling and quoting platform for CNC manufacturers — where the same quality check protocols come out of every quote, next to cost estimation, manufacturing plans and G-code generation.
 
 ```
 "Create a Q1 quality plan for flange.pdf with type-prefixed balloon numbers"
         │
-        ▼  (your AI assistant calls the tools)
+        ▼  (your assistant calls the tools)
 analyze_drawing ──► build_quality_plan ──► export_inspection_pdf + export_quality_plan_excel
                                                        │
                                                        ▼
@@ -28,7 +28,7 @@ analyze_drawing ──► build_quality_plan ──► export_inspection_pdf + e
 
 Plus a `create-quality-plan` prompt that walks the assistant through analyze → review → export.
 
-**Where the AI runs.** `analyze_drawing` is the only tool that leaves your machine: it uploads the PDF to Imnoo's drawing analysis exactly like the web app does — **1 free analysis per day per IP address** (more when signed in), uploaded files are deleted automatically after a short retention period, nothing else is stored. Everything after that — plan building, numbering, acceptance limits, Excel and PDF generation — runs locally and offline.
+**Where the analysis runs.** `analyze_drawing` is the only tool that leaves your machine: it uploads the PDF to Imnoo's drawing analysis exactly like the web app does — **1 free analysis per day per IP address** (more when signed in), uploaded files are deleted automatically after a short retention period, nothing else is stored. Everything after that — plan building, numbering, acceptance limits, Excel and PDF generation — runs locally and offline.
 
 ## Installation
 
@@ -126,7 +126,7 @@ One object, accepted by `build_quality_plan` and both export tools — pass the 
 
 ## Limitations
 
-- The drawing analysis is AI: it can miss or misread characteristics, especially on low-quality scans — verify the plan against the drawing (`rows[].value` corrects a value, `exclude` drops a row).
+- The drawing analysis is automated: it can miss or misread characteristics, especially on low-quality scans — verify the plan against the drawing (`rows[].value` corrects a value, `exclude` drops a row).
 - Free tier: 1 analysis per day per IP address; PDFs up to 30 MB. Saved analyses (`save_analysis_to` → `load_analysis`) are unlimited and offline.
 - Hand-drawn characteristics, dragging balloons and saving the plan into the Imnoo calculator are features of the [web app](https://quality-check-protocol.imnoo.com) only.
 - Encrypted or unusual PDFs that cannot be copied fall back to `variant: "plan"` here (the web app rasterises them instead).
