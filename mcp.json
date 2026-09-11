@@ -1,0 +1,10 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.1.0/mcp.schema.json",
+  "mcpServers": {
+    "quality-control-plan": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "quality-control-plan-mcp"]
+    }
+  }
+}

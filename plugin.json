@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.1.0/plugin.schema.json",
+  "name": "quality-control-plan-mcp",
+  "version": "0.1.0",
+  "description": "Generate quality control plans and inspection reports from technical-drawing PDFs — tolerances, fits, threads, GD&T and surface finishes extracted automatically, balloon numbering, acceptance limits, ballooned drawing PDF and Excel measurement report.",
+  "author": { "name": "Imnoo AG", "url": "https://www.imnoo.com" },
+  "homepage": "https://quality-check-protocol.imnoo.com",
+  "repository": "https://github.com/imnoo-team/quality-control-plan-mcp",
+  "license": "MIT",
+  "keywords": ["mcp", "quality-control", "inspection-plan", "ballooning", "technical-drawing", "manufacturing", "cnc"]
+}
