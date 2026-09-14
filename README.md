@@ -211,6 +211,10 @@ Quote the complete job — not just the spindle time.
 
 👉 [Book a demo at imnoo.com](https://www.imnoo.com)
 
+## Privacy
+
+The only data that leaves your machine is the drawing PDF you pass to `analyze_drawing`: it is uploaded over HTTPS to Imnoo's drawing analysis at quality-check-protocol.imnoo.com to detect the characteristics, deleted automatically within 24 hours, and not used for anything else. The optional `IMNOO_ACCESS_TOKEN` identifies your Imnoo account so your plan's quota applies. There is no telemetry and no other network call; plan building and the Excel/PDF exports run locally on your machine. Imnoo's privacy policy: https://www.imnoo.com/en/privacy-policy · Imprint: https://www.imnoo.com/en/imprint · Questions: https://github.com/imnoo-team/quality-control-plan-mcp/issues
+
 ## License
 
 [MIT](./LICENSE) © Imnoo AG
