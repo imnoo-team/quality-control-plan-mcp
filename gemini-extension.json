@@ -1,0 +1,12 @@
+{
+  "name": "quality-control-plan-mcp",
+  "version": "0.1.0",
+  "description": "Generate quality control plans and inspection reports from technical-drawing PDFs — tolerances, fits, threads, GD&T and surface finishes extracted automatically, balloon numbering, acceptance limits, ballooned drawing PDF and Excel measurement report. By Imnoo.",
+  "mcpServers": {
+    "quality-control-plan": {
+      "command": "npx",
+      "args": ["-y", "quality-control-plan-mcp"]
+    }
+  },
+  "contextFileName": "GEMINI.md"
+}
