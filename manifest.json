@@ -1,0 +1,107 @@
+{
+  "manifest_version": "0.2",
+  "name": "quality-control-plan",
+  "display_name": "Quality Control Plan Generator",
+  "version": "0.1.0",
+  "description": "Quality control plans and inspection reports from technical-drawing PDFs — tolerances, fits, threads, GD&T, balloons, Excel + PDF.",
+  "long_description": "Hand Claude a technical-drawing PDF and get a numbered inspection plan: every dimensional tolerance, ISO fit, thread, geometric tolerance (GD&T) and surface finish is extracted automatically by Imnoo's drawing analysis, ballooned on the drawing and listed with acceptance limits and a measuring instrument. Choose the inspection class (100 %, Q1, Q2) and numbering style, then export the ballooned drawing PDF, the inspection package or the Excel measurement and inspection report — the same documents the Imnoo calculator produces. Only analyze_drawing uploads the PDF (to quality-check-protocol.imnoo.com, 1 free analysis per day without a token); everything else runs locally.",
+  "author": {
+    "name": "Imnoo AG",
+    "url": "https://www.imnoo.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imnoo-team/quality-control-plan-mcp"
+  },
+  "homepage": "https://quality-check-protocol.imnoo.com",
+  "documentation": "https://github.com/imnoo-team/quality-control-plan-mcp#readme",
+  "support": "https://github.com/imnoo-team/quality-control-plan-mcp/issues",
+  "icon": "icon.png",
+  "server": {
+    "type": "node",
+    "entry_point": "server/dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/dist/index.js"
+      ],
+      "env": {
+        "IMNOO_ACCESS_TOKEN": "${user_config.imnoo_access_token}",
+        "QCP_APP_URL": "${user_config.qcp_app_url}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "analyze_drawing",
+      "description": "Uploads a drawing PDF (vector or scanned, ≤ 30 MB) to Imnoo's drawing analysis and returns every detected characteristic with type, value, page, position, confidence and printed balloon number, plus the title block."
+    },
+    {
+      "name": "load_analysis",
+      "description": "Opens a saved analysis JSON — fully offline, no upload, no daily credit."
+    },
+    {
+      "name": "build_quality_plan",
+      "description": "Builds the plan from an analysis: balloon numbering, acceptance limits, measuring instruments, inspection class and selection presets. Deterministic."
+    },
+    {
+      "name": "export_quality_plan_excel",
+      "description": "Writes the Measurement and inspection report workbook (.xlsx) for the plan."
+    },
+    {
+      "name": "export_inspection_pdf",
+      "description": "Writes the ballooned drawing, the full inspection package or the plan document as PDF. The source PDF is never modified."
+    }
+  ],
+  "prompts": [
+    {
+      "name": "create-quality-plan",
+      "description": "Walks through analyze → review → export for one drawing.",
+      "arguments": [
+        "drawing_path"
+      ],
+      "text": "Create a quality control plan for the drawing at ${arguments.drawing_path}: analyze it, show me the plan summary, then export the ballooned PDF and the Excel report."
+    }
+  ],
+  "keywords": [
+    "quality-control",
+    "inspection-plan",
+    "ballooning",
+    "technical-drawing",
+    "gd&t",
+    "manufacturing",
+    "cnc",
+    "pdf",
+    "excel"
+  ],
+  "license": "MIT",
+  "privacy_policies": [
+    "https://www.imnoo.com/en/privacy-policy"
+  ],
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": [
+      "darwin",
+      "win32"
+    ],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "user_config": {
+    "imnoo_access_token": {
+      "type": "string",
+      "title": "Imnoo access token (optional)",
+      "description": "The id token of your quality-check-protocol.imnoo.com login. Raises the drawing-analysis limit from 1 free drawing per day to your plan's quota.",
+      "required": false,
+      "sensitive": true
+    },
+    "qcp_app_url": {
+      "type": "string",
+      "title": "Analysis service URL",
+      "description": "Leave the default unless you run your own deployment of the Imnoo quality check protocol app.",
+      "required": false,
+      "default": "https://quality-check-protocol.imnoo.com"
+    }
+  }
+}
