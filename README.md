@@ -30,7 +30,7 @@ analyze_drawing ──► build_quality_plan ──► export_inspection_pdf + e
 
 Plus a `create-quality-plan` prompt that walks the assistant through analyze → review → export.
 
-**Where the analysis runs.** `analyze_drawing` is the only tool that leaves your machine: it uploads the PDF to Imnoo's drawing analysis exactly like the web app does — **1 free analysis per day per IP address** (more when signed in), uploaded files are deleted automatically after a short retention period, nothing else is stored. Everything after that — plan building, numbering, acceptance limits, Excel and PDF generation — runs locally and offline.
+**Where the analysis runs.** `analyze_drawing` is the only tool that leaves your machine: it uploads the PDF to Imnoo's drawing analysis exactly like the web app does — **1 free analysis per day per IP address** (need more? signed-in Imnoo users get a higher daily limit in the [web app](https://quality-check-protocol.imnoo.com)), uploaded files are deleted automatically after a short retention period, nothing else is stored. Everything after that — plan building, numbering, acceptance limits, Excel and PDF generation — runs locally and offline.
 
 ## Installation
 
@@ -90,7 +90,6 @@ npx -y quality-control-plan-mcp
 
 | Variable | Purpose |
 | --- | --- |
-| `IMNOO_ACCESS_TOKEN` | Your Imnoo account token (the id token of your [quality-check-protocol.imnoo.com](https://quality-check-protocol.imnoo.com) login) — raises the daily analysis limit to your plan's quota. |
 | `QCP_APP_URL` | Point the analysis at another deployment of the web app (default `https://quality-check-protocol.imnoo.com`). |
 
 ## Example session
@@ -213,7 +212,7 @@ Quote the complete job — not just the spindle time.
 
 ## Privacy
 
-The only data that leaves your machine is the drawing PDF you pass to `analyze_drawing`: it is uploaded over HTTPS to Imnoo's drawing analysis at quality-check-protocol.imnoo.com to detect the characteristics, deleted automatically within 24 hours, and not used for anything else. The optional `IMNOO_ACCESS_TOKEN` identifies your Imnoo account so your plan's quota applies. There is no telemetry and no other network call; plan building and the Excel/PDF exports run locally on your machine. Imnoo's privacy policy: https://www.imnoo.com/en/privacy-policy · Imprint: https://www.imnoo.com/en/imprint · Questions: https://github.com/imnoo-team/quality-control-plan-mcp/issues
+The only data that leaves your machine is the drawing PDF you pass to `analyze_drawing`: it is uploaded over HTTPS to Imnoo's drawing analysis at quality-check-protocol.imnoo.com to detect the characteristics, deleted automatically within 24 hours, and not used for anything else. There is no telemetry and no other network call; plan building and the Excel/PDF exports run locally on your machine. Imnoo's privacy policy: https://www.imnoo.com/en/privacy-policy · Imprint: https://www.imnoo.com/en/imprint · Questions: https://github.com/imnoo-team/quality-control-plan-mcp/issues
 
 ## License
 

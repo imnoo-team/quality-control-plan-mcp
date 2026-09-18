@@ -3,7 +3,7 @@
   "name": "com.imnoo/quality-control-plan",
   "title": "Quality Control Plan Generator",
   "description": "Quality control plans from drawing PDFs: auto-extracted tolerances, balloons, Excel + PDF reports.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "websiteUrl": "https://quality-check-protocol.imnoo.com",
   "repository": {
     "url": "https://github.com/imnoo-team/quality-control-plan-mcp",
@@ -20,12 +20,6 @@
         "type": "stdio"
       },
       "environmentVariables": [
-        {
-          "name": "IMNOO_ACCESS_TOKEN",
-          "description": "Optional. Your Imnoo account token (the id token of your quality-check-protocol.imnoo.com login). Raises the analysis limit from 1 free drawing per day per IP to your plan's quota. Everything except analyze_drawing runs locally without it.",
-          "isRequired": false,
-          "isSecret": true
-        },
         {
           "name": "QCP_APP_URL",
           "description": "Optional. Base URL of the Imnoo web app that runs the drawing analysis; only change it to target another deployment.",
